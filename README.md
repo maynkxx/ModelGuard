@@ -1,4 +1,4 @@
-# SafeEval 🛡️
+# ModelGuard🛡️
 
 **Four-layer LLM safety and capability evaluation framework**
 
@@ -118,4 +118,10 @@ GPT-4o scores every response on:
 pytest tests/ -v
 ```
 
+
 All tests use mock responses and mock judge scores — no API calls required.
+
+## Future Improvements
+- Add more red-team attack datasets
+- Add latency benchmarking
+- Add downloadable evaluation reports
