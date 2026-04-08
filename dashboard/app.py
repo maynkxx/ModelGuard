@@ -629,7 +629,7 @@ if "df"   not in st.session_state: st.session_state.df   = generate_demo_data(n=
 if "page" not in st.session_state: st.session_state.page = "Observe"
 if "tf"   not in st.session_state: st.session_state.tf   = "30d"
 
-
+# Streamlit dashboard entry point
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### 🛡️ SafeEval")
