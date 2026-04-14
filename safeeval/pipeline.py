@@ -5,6 +5,7 @@ SafeEval Pipeline — orchestrates all four layers:
   3. LLM-as-judge
   4. Metrics → results DataFrame
 """
+# Core evaluation orchestration pipeline
 import json
 import os
 import time
