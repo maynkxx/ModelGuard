@@ -108,7 +108,7 @@ def generate_demo_data(n: int = 500, days: int = 30) -> pd.DataFrame:
     df = df.sort_values("timestamp_dt", ascending=False).reset_index(drop=True)
     return df
 
-
+# Data loading utilities for dashboard analytics
 def load_results(results_dir: str = "data/results") -> pd.DataFrame:
     path = Path(results_dir)
     csvs = list(path.glob("*.csv"))
