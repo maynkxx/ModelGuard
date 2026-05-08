@@ -8,7 +8,7 @@ from safeeval.pipeline import SafeEvalPipeline, RunConfig, _mock_model_response,
 from safeeval.metrics.safety import compute_safety_metrics
 from safeeval.metrics.capability import compute_capability_metrics
 
-
+# Evaluation pipeline integration tests
 def make_cfg(**kwargs):
     defaults = dict(
         models=["gpt-4o"],
