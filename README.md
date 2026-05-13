@@ -1,127 +1,255 @@
-# ModelGuard🛡️
+# ModelGuard 🛡️
 
-**Four-layer LLM safety and capability evaluation framework**
+<p align="center">
+  <b>LLM Safety, Red-Teaming & Capability Evaluation Framework</b>
+</p>
 
-SafeEval is an evaluation toolkit + dashboard that runs LLMs on **capability benchmarks** (e.g., TruthfulQA/MMLU/GSM8K) and **red-team attack sets** (e.g., HarmBench/AdvBench) to compute **safety + capability metrics**. It visualizes results in a Streamlit dashboard for quick **model comparison**, **ASR/refusal/hallucination trends**, and per-category breakdowns.
+<p align="center">
+  Evaluate, benchmark, and compare Large Language Models across safety and capability dimensions using automated red-team pipelines and interactive analytics dashboards.
+</p>
 
-```
-Capability benchmarks + Red-team attack sets
-              ↓
-         Target LLM(s)
-              ↓
-       LLM-as-judge layer
-              ↓
-   Safety metrics | Capability metrics
-              ↓
-  Streamlit dashboard + model comparison
+---
+
+## 🚀 Overview
+
+ModelGuard is a comprehensive evaluation framework designed to benchmark Large Language Models (LLMs) on:
+
+- 🔐 Safety robustness
+- 🎯 Capability performance
+- ⚠️ Jailbreak resistance
+- 📊 Hallucination analysis
+- 🤖 LLM-as-a-Judge scoring
+- 📈 Interactive evaluation dashboards
+
+The framework combines:
+- capability benchmarks
+- adversarial attack datasets
+- automated judging pipelines
+- metric aggregation
+- Streamlit-based visualization
+
+to provide end-to-end LLM evaluation workflows.
+
+---
+
+## 🧠 Evaluation Pipeline
+
+```text
+Capability Benchmarks + Red-Team Attack Sets
+                    ↓
+               Target LLM(s)
+                    ↓
+           LLM-as-a-Judge Layer
+                    ↓
+      Safety Metrics | Capability Metrics
+                    ↓
+     Interactive Analytics Dashboard
 ```
 
 ---
 
-## Quick start
+# ✨ Features
 
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Set API keys (optional — demo mode works without them)
-export OPENAI_API_KEY=sk-...
-export ANTHROPIC_API_KEY=sk-ant-...
-
-# 3. Launch the dashboard
-streamlit run dashboard/app.py
-
-# 4. Or run via CLI
-python scripts/run_eval.py --models gpt-4o --models claude-sonnet \
-    --num-bench 20 --num-attack 20
-```
+- Multi-model evaluation support
+- Automated red-team attack testing
+- LLM-as-a-judge evaluation layer
+- Capability benchmarking pipelines
+- Safety metric computation
+- Hallucination tracking
+- Interactive Streamlit dashboard
+- Model comparison analytics
+- Config-driven architecture
+- Mock evaluation support for testing
 
 ---
 
-## Project structure
+# 📊 Supported Benchmarks
 
-```
-safeeval/
-├── config/
-│   ├── models.yaml          # LLM adapter configs
-│   ├── benchmarks.yaml      # Capability benchmark settings
-│   └── attack_sets.yaml     # Red-team attack set configs
-│
-├── data/
-│   ├── capability_benchmarks/   # Cached benchmark data
-│   ├── attack_sets/             # Cached attack samples
-│   └── results/                 # CSV/JSON eval outputs
-│
-├── safeeval/
-│   ├── models/              # LLM adapters (OpenAI, Anthropic, Mistral, Llama)
-│   ├── benchmarks/          # TruthfulQA, MMLU, GSM8K, HellaSwag
-│   ├── attacks/             # HarmBench, AdvBench, jailbreak templates
-│   ├── judge/               # LLM-as-judge (GPT-4o scorer)
-│   ├── metrics/             # Safety + capability metric computation
-│   └── pipeline.py          # Four-layer orchestrator
-│
-├── dashboard/
-│   ├── app.py               # Streamlit dashboard (main entry)
-│   ├── charts/              # Plotly chart builders
-│   └── data_loader.py       # Results loader + demo data generator
-│
-├── scripts/
-│   └── run_eval.py          # CLI entry point
-│
-└── tests/
-    └── test_pipeline.py     # Pytest suite (no API keys needed)
-```
+| Category | Benchmarks |
+|----------|-------------|
+| Capability | TruthfulQA, GSM8K, MMLU, HellaSwag |
+| Safety | HarmBench, AdvBench |
+| Jailbreaks | DAN, Dev Mode, Base64 prompts |
 
 ---
 
-## Four layers explained
+# 🏗️ Architecture
+
+## Four-Layer Evaluation System
 
 ### Layer 1 — Inputs
-- **Capability benchmarks**: TruthfulQA, MMLU, GSM8K, HellaSwag
-- **Red-team attack sets**: HarmBench, AdvBench, jailbreak templates (DAN, Dev Mode, Base64, etc.)
+- Capability benchmark datasets
+- Adversarial attack datasets
+- Jailbreak prompts/templates
 
-### Layer 2 — Target LLM(s)
-Swappable via `config/models.yaml`. Supports GPT-4o, Claude Sonnet, Mistral-7B, Llama-3.
+### Layer 2 — Target LLMs
+Supports configurable evaluation across:
+- GPT-4o
+- Claude Sonnet
+- Mistral-7B
+- Llama-3
 
-### Layer 3 — LLM-as-judge
-GPT-4o scores every response on:
-- **Harmfulness** (0–1): is the response harmful?
-- **Truthfulness** (0–1): is it factually accurate?
-- **Refusal quality** (0–1): was the refusal appropriate?
+### Layer 3 — LLM-as-a-Judge
+Automated scoring for:
+- Harmfulness
+- Truthfulness
+- Refusal quality
 
-### Layer 4 — Metrics
+### Layer 4 — Metrics & Analytics
 
-| Safety | Capability |
-|--------|-----------|
+| Safety Metrics | Capability Metrics |
+|----------------|-------------------|
 | Attack Success Rate (ASR) | Accuracy |
-| Refusal rate | BLEU |
-| False positive rate | BERTScore |
-| Per-category ASR | Hallucination rate |
+| Refusal Rate | BLEU |
+| False Positive Rate | BERTScore |
+| Per-category ASR | Hallucination Rate |
 
 ---
 
-## Dashboard pages
+# 🖥️ Dashboard Modules
 
-| Page | Description |
-|------|-------------|
-| **Observe** | Live prompt-run table with filters, search, time controls |
-| **Run Evaluation** | Configure + launch eval runs from UI |
-| **Safety Analysis** | ASR charts, per-category heatmap |
-| **Capability Analysis** | Radar chart, pass-rate trends |
-| **Model Comparison** | Side-by-side model scorecard |
+| Module | Description |
+|--------|-------------|
+| Observe | Live evaluation monitoring |
+| Run Evaluation | Launch evaluation runs |
+| Safety Analysis | ASR and jailbreak analytics |
+| Capability Analysis | Benchmark performance tracking |
+| Model Comparison | Multi-model score comparison |
 
 ---
 
-## Running tests (no API keys needed)
+# 📁 Project Structure
+
+```text
+ModelGuard/
+├── config/
+│   ├── models.yaml
+│   ├── benchmarks.yaml
+│   └── attack_sets.yaml
+│
+├── data/
+│   ├── capability_benchmarks/
+│   ├── attack_sets/
+│   └── results/
+│
+├── safeeval/
+│   ├── models/
+│   ├── benchmarks/
+│   ├── attacks/
+│   ├── judge/
+│   ├── metrics/
+│   └── pipeline.py
+│
+├── dashboard/
+│   ├── app.py
+│   ├── charts/
+│   └── data_loader.py
+│
+├── scripts/
+│   └── run_eval.py
+│
+└── tests/
+    └── test_pipeline.py
+```
+
+---
+
+# ⚡ Quick Start
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/maynkxx/ModelGuard.git
+cd ModelGuard
+```
+
+---
+
+## 2. Create Virtual Environment
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4. Configure API Keys (Optional)
+
+```bash
+export OPENAI_API_KEY=your_key
+export ANTHROPIC_API_KEY=your_key
+```
+
+Demo mode works without API keys.
+
+---
+
+## 5. Launch Streamlit Dashboard
+
+```bash
+streamlit run dashboard/app.py
+```
+
+---
+
+## 6. Run CLI Evaluation
+
+```bash
+python scripts/run_eval.py \
+    --models gpt-4o \
+    --models claude-sonnet \
+    --num-bench 20 \
+    --num-attack 20
+```
+
+---
+
+# 🧪 Running Tests
 
 ```bash
 pytest tests/ -v
 ```
 
+All tests use mock responses and mock judge scores.
 
-All tests use mock responses and mock judge scores — no API calls required.
+---
 
-## Future Improvements
-- Add more red-team attack datasets
-- Add latency benchmarking
-- Add downloadable evaluation reports
+# 📌 Future Improvements
+
+- Additional red-team attack datasets
+- Latency benchmarking support
+- PDF evaluation report export
+- Distributed benchmark execution
+- Cost estimation dashboard
+- Real-time evaluation monitoring
+
+---
+
+# 🤝 Contributing
+
+Contributions, feature requests, and improvements are welcome.
+
+Feel free to fork the repository and submit pull requests.
+
+---
+
+# 📄 License
+
+This project is intended for research and educational purposes.
+
+---
+
+# 👨‍💻 Author
+
+**Mayank Choudhary**
+
+AI/ML • LLM Systems • RAG • AI Safety • Evaluation Frameworks
