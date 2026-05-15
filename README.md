@@ -104,7 +104,7 @@ Automated scoring for:
 | False Positive Rate | BERTScore |
 | Per-category ASR | Hallucination Rate |
 
----
+--
 
 # 🖥️ Dashboard Modules
 
